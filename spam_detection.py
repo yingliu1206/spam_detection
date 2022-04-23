@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import numpy as np 
 import pandas as pd 
 import argparse
 from sklearn.feature_extraction.text import CountVectorizer
@@ -165,26 +164,29 @@ def main(dataset):
     
     # add feature 2
     feature2 = lb.fit_transform(l_phone)
-    tfidf_feature12 = sc.sparse.hstack((tfidf_feature1, feature2))
+    tfidf_feature2 = sc.sparse.hstack((messages_tfidf, feature2))
     
     # add feature 3
     feature3 = lb.fit_transform(l_currency)
-    tfidf_feature123 = sc.sparse.hstack((tfidf_feature12, feature3))
+    tfidf_feature3 = sc.sparse.hstack((messages_tfidf, feature3))
     
-    # train basic model
+    # all in
+    tfidf_all = sc.sparse.hstack((messages_tfidf, feature1, feature2, feature3))
     
+    # train models with different features input
+    prepared_features = {"base features": messages_tfidf, 
+                         "base + has_urls": tfidf_feature1,
+                         "base + has_phone_number": tfidf_feature2,
+                         "base + has_currency_symbol": tfidf_feature3,
+                         "all_in": tfidf_all}
     
-    spam_detect_model = MultinomialNB().fit(messages_tfidf, message['labels'])
+    for cond, features in prepared_features.items():
+        print(f"Features: {cond}")
+        spam_detect_model = MultinomialNB().fit(features, message['labels'])
+        all_predictions = spam_detect_model.predict(features)
     
-    spam_detect_model = MultinomialNB().fit(tfidf_feature1, message['labels'])
-    all_predictions = spam_detect_model.predict(tfidf_feature1)
-    
-    print(classification_report(message['labels'],all_predictions))
-    print(confusion_matrix(message['labels'],all_predictions))
-
-    
-
-
+        print(classification_report(message['labels'],all_predictions))
+        print(confusion_matrix(message['labels'],all_predictions))
 
     
 
