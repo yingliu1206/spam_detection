@@ -15,7 +15,7 @@ The spam content increases as people extensively use social media and the time s
 
 ## Exploratory Data Analysis
 
-![Image text](https://github.com/yingliu1206/spam_detection/plots/data_description_1.png)
+![Alt text](https://github.com/yingliu1206/spam_detection/plots/data_description_1.png)
 
 
 ## Results
