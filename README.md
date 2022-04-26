@@ -98,8 +98,8 @@ Comparing the baseline model with the model having the url feature, we can find 
 | all_in       | 98%      | 99%       | 83%    | 90% |
 
 <p float="left">
-  <img src="plots/base_features.JPG" width="100" />
-  <img src="plots/base_url.JPG" width="100" /> 
+  <img src="plots/base_feature.JPG" width="100" />
+  <img src="plots/base_urls.JPG" width="100" /> 
   <img src="plots/base_phone_number.JPG" width="100" />
   <img src="plots/base_currency.JPG" width="100" />
   <img src="plots/base_all_in.JPG" width="100" />
