@@ -8,7 +8,6 @@ from sklearn import preprocessing
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report,confusion_matrix
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_score
 import string
 import scipy as sc
 from nltk.corpus import stopwords
