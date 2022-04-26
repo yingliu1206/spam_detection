@@ -25,17 +25,6 @@ We make a bar chart to detect how long the text messages are. Almost all the mes
 ![image](https://github.com/yingliu1206/spam_detection/blob/main/plots/data_description_2.png)
 
 
-## Model Selection -- Multinomial Naive Bayes
-Multinomial Naïve Bayes algorithm will be used for learning and classification of messages as spam and ham. 
-Why Multinomial Naive Bayes classifier algorithm is a good choice for spam filtering?
-
-* Bayes theorem has strong independence property and it gives the probability of an event based on the prior knowledge of a related event. 
-
-* Multinomial  Naive Bayes model: a document can be represented by a feature vector with integer elements whose value is the frequency of that word in the document.  The document feature vectors capture the frequency of words, not just their presence or absence. 
-
-
-Finally, accuracy, precision, recall, F1-score, and support cases (how many cases supported that classification) will be used to evaluate the model performance.
-
 ## Feature Selection
 The features we chose include the base feature, feature_url, feature_num, and feature_currency_symbol.
 * Base feature: Tf-idf weight 
@@ -84,6 +73,17 @@ Finally, we got five types of features:
 |base + has_phone_number               | messages’ tfidf weight and has phone number or not            |
 |base + has_currency_symbol               | messages’ tfidf weight and has currency symbols or not         |
 |   all_in                                      |    all of the features            |
+
+## Model Selection -- Multinomial Naive Bayes
+Multinomial Naïve Bayes algorithm will be used for learning and classification of messages as spam and ham. 
+Why Multinomial Naive Bayes classifier algorithm is a good choice for spam filtering?
+
+* Bayes theorem has strong independence property and it gives the probability of an event based on the prior knowledge of a related event. 
+
+* Multinomial  Naive Bayes model: a document can be represented by a feature vector with integer elements whose value is the frequency of that word in the document.  The document feature vectors capture the frequency of words, not just their presence or absence. 
+
+
+Finally, accuracy, precision, recall, F1-score, and support cases (how many cases supported that classification) will be used to evaluate the model performance.
 
 ## Results
 
