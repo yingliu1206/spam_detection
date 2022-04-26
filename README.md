@@ -97,7 +97,13 @@ Comparing the baseline model with the model having the url feature, we can find 
 | base + has_currency_symbol | 97%      | 98%       | 74%    | 84% |
 | all_in       | 98%      | 99%       | 83%    | 90% |
 
-
+<p float="left">
+  <img src="plots/base_features.JPG" width="100" />
+  <img src="plots/base_url.JPG" width="100" /> 
+  <img src="plots/base_phone_number.JPG" width="100" />
+  <img src="plots/base_currency.JPG" width="100" />
+  <img src="plots/base_all_in.JPG" width="100" />
+</p>
 
 ## Command Line
 
@@ -106,3 +112,5 @@ Comparing the baseline model with the model having the url feature, we can find 
 
 # Discussion
 
+* Are there any other features can be used to detect spams?
+* Besides multinomial Naive Bayes model, are there any other models which can be used here?
