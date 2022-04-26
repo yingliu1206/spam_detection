@@ -42,6 +42,7 @@ The features we chose include the base feature, feature_url, feature_num, and fe
 * Feature_url: has url or not.
 * Feature_num: has phone number or not. 
   * The phone number format include:
+  * ![image](https://github.com/yingliu1206/spam_detection/blob/main/plots/phone_number_format.png)
 * Feature_currency_symbol: has currency symbol or not.
 
 
@@ -89,12 +90,13 @@ Finally, we got five types of features:
 Comparing the baseline model with the model having the url feature, we can find they have exactly the same value for all metrics, which means whether having url or not doesn’t contribute to distinguishing spam messages from ham ones in this dataset. For the third model with _has_phone_number_ feature, it has 1% more accuracy than baseline and contributes to 10% increase of recall and 7% increase of F1 score. Therefore, phone number can be a key feature to find spams in this case. Though the last feature _has_currency_symbol_ doesn’t perform as well as _has_phone_number_, it still contributes 1%, 4%, and 2% increase in accuracy, recall, and F1 score respectively. Finally, the all-in model has the best performance with 98% accuracy, 99% precision, 83% recall, and 90% F-1 score. To conclude, the model with the combination of all features should be chosen to detect spam messages.
 
 | Model Name | Accuracy | Precision | Recall | F1  |
-|------------|----------|-----------|--------|-----|
-| base line  | 96%      | 100%      | 70%    | 82% |
-| base + has_urls       | 96%      | 100%      | 70%    | 82% |
-| base + has_phone_number    | 97%      | 99%       | 80%    | 89% |
+|-----------|----------|-----------|--------|-----|
+| baseline  | 96%      | 100%      | 70%    | 82% |
+| base + has_urls      | 96%      | 100%      | 70%    | 82% |
+| base + has_phone_number   | 97%      | 99%       | 80%    | 89% |
 | base + has_currency_symbol | 97%      | 98%       | 74%    | 84% |
-| all_in        | 98%      | 99%       | 83%    | 90% |
+| all_in       | 98%      | 99%       | 83%    | 90% |
+
 
 
 ## Command Line
