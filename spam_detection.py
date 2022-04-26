@@ -7,6 +7,8 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn import preprocessing
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report,confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_score
 import string
 import scipy as sc
 from nltk.corpus import stopwords
@@ -96,11 +98,40 @@ def has_currency_symbol(line):
         return 'yes'
     else:
         return 'no'
+
+def preprocess(messages_bow, dataframe):
+            
+    # tfidf
+    tfidf_transformer = TfidfTransformer().fit(messages_bow)
+    messages_tfidf = tfidf_transformer.transform(messages_bow)
+    print('TF-IDF shape:', messages_tfidf.shape)
+    
+    # add feature 1
+    lb = preprocessing.LabelBinarizer()
+    feature1 = lb.fit_transform(dataframe['has_url'])
+    tfidf_feature1 = sc.sparse.hstack((messages_tfidf, feature1))
+    
+    # add feature 2
+    feature2 = lb.fit_transform(dataframe['has_phoneNum'])
+    tfidf_feature2 = sc.sparse.hstack((messages_tfidf, feature2))
+    
+    # add feature 3
+    feature3 = lb.fit_transform(dataframe['has_currency'])
+    tfidf_feature3 = sc.sparse.hstack((messages_tfidf, feature3))
+    
+    # all in
+    tfidf_all = sc.sparse.hstack((messages_tfidf, feature1, feature2, feature3))
+    
+    # train models with different features input
+    prepared_features = {"base features": messages_tfidf, 
+                         "base + has_urls": tfidf_feature1,
+                         "base + has_phone_number": tfidf_feature2,
+                         "base + has_currency_symbol": tfidf_feature3,
+                         "all_in": tfidf_all}
+    
+    return prepared_features
     
 def main(dataset):
-    
-    # import dataset
-    # to do: change to dataset
     
     message = pd.read_csv(dataset, sep='\t', names=["labels","message"])
     print(f"The overview of the dataset: {message.head()}")
@@ -114,7 +145,7 @@ def main(dataset):
     message['length'] = message['message'].apply(len)
     
     # Data Visualization    
-    message['length'].plot(bins=50,kind='hist', title = 'The distribution of length of messages')
+    message['length'].plot(bins=50,kind='hist', title = 'The distribution of length of messages', xlabel = 'length')
     message.length.describe()
     
     # data preprocessing
@@ -141,52 +172,32 @@ def main(dataset):
     
     message['has_currency'] = l_currency
     
-        
+    # train-test split
+    msg_train,msg_test,label_train,label_test = train_test_split(message, message['labels'], test_size=0.3)
+    print("The length of training set:", len(msg_train))
+    print("The length of training labels:", len(label_train))
+    print("The length of test set:", len(msg_test))
+    print("The length of test labels:", len(label_test))
+    
     # vectorization
-    bow_transformer = CountVectorizer(analyzer=text_process).fit(message['message'])
-    messages_bow = bow_transformer.transform(message['message'])
-    print('Shape of Sparse Matrix: ',messages_bow.shape)
-    print('Amount of non-zero occurences:',messages_bow.nnz)
+    bow_transformer = CountVectorizer(analyzer=text_process)
+    messages_bow_train = bow_transformer.fit_transform(msg_train['message'])
+    print('Shape of Sparse Matrix of training set: ',messages_bow_train.shape)
     
-    # calculate the sparsity
-    sparsity =(100.0 * messages_bow.nnz/(messages_bow.shape[0]*messages_bow.shape[1]))
-    print('sparsity:{}'.format(round(sparsity)))
+    messages_bow_test = bow_transformer.transform(msg_test['message'])
+    print('Shape of Sparse Matrix of test set: ',messages_bow_test.shape)    
     
-    # tfidf
-    tfidf_transformer = TfidfTransformer().fit(messages_bow)
-    messages_tfidf = tfidf_transformer.transform(messages_bow)
-    print('TF-IDF shape:', messages_tfidf.shape)
+    # preprocessing
+    prepared_features_train = preprocess(messages_bow_train, msg_train)
+    prepared_features_test = preprocess(messages_bow_test, msg_test)
     
-    # add feature 1
-    lb = preprocessing.LabelBinarizer()
-    feature1 = lb.fit_transform(l_url)
-    tfidf_feature1 = sc.sparse.hstack((messages_tfidf, feature1))
-    
-    # add feature 2
-    feature2 = lb.fit_transform(l_phone)
-    tfidf_feature2 = sc.sparse.hstack((messages_tfidf, feature2))
-    
-    # add feature 3
-    feature3 = lb.fit_transform(l_currency)
-    tfidf_feature3 = sc.sparse.hstack((messages_tfidf, feature3))
-    
-    # all in
-    tfidf_all = sc.sparse.hstack((messages_tfidf, feature1, feature2, feature3))
-    
-    # train models with different features input
-    prepared_features = {"base features": messages_tfidf, 
-                         "base + has_urls": tfidf_feature1,
-                         "base + has_phone_number": tfidf_feature2,
-                         "base + has_currency_symbol": tfidf_feature3,
-                         "all_in": tfidf_all}
-    
-    for cond, features in prepared_features.items():
+    for cond, features in prepared_features_train.items():
         print(f"Features: {cond}")
-        spam_detect_model = MultinomialNB().fit(features, message['labels'])
-        all_predictions = spam_detect_model.predict(features)
-    
-        print(classification_report(message['labels'],all_predictions))
-        print(confusion_matrix(message['labels'],all_predictions))
+        spam_detect_model = MultinomialNB().fit(features, label_train)   
+        all_predictions = spam_detect_model.predict(prepared_features_test[cond])  
+        
+        print(classification_report(label_test,all_predictions))
+        print(confusion_matrix(label_test,all_predictions))
 
     
 
