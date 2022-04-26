@@ -110,7 +110,7 @@ Comparing the baseline model with the model having the url feature, we can find 
 `python spam_detection.py --dataset SMSSpamCollection`
 
 
-# Discussion
+## Discussion
 
 * Are there any other features can be used to detect spams?
-* Besides multinomial Naive Bayes model, are there any other models which can be used here?
+* Besides multinomial Naive Bayes model, are there any other models which can be used for spam detection problem?
