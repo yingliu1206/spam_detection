@@ -43,7 +43,7 @@ The features we chose include the base feature, feature_url, feature_num, and fe
 * Feature_num: has phone number or not. 
   * The phone number format include:
   * <img src="plots/phone_number_format.png" width="300"/>
-  * Feature_currency_symbol: has currency symbol or not.
+* Feature_currency_symbol: has currency symbol or not.
 
 
 ## Text preprocessing
