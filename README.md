@@ -15,7 +15,7 @@ The spam content increases as people extensively use social media and the time s
 
 ## Exploratory Data Analysis
 
-![image](https://github.com/yingliu1206/spam_detection/blob/main/plots/data_description_1.png)
+< img src="https://github.com/yingliu1206/spam_detection/blob/main/plots/data_description_1.png" width="500px")
 * There are just two labels: ham and spam.
 * From all 5572 messages, there are 5169 unique messages.
 * The number of ham messages is 4825.
@@ -42,7 +42,7 @@ The features we chose include the base feature, feature_url, feature_num, and fe
 * Feature_url: has url or not.
 * Feature_num: has phone number or not. 
   * The phone number format include:
-  * ![image](https://github.com/yingliu1206/spam_detection/blob/main/plots/phone_number_format.png)
+  * < img src="https://github.com/yingliu1206/spam_detection/blob/main/plots/phone_number_format.png" width="500px")
 * Feature_currency_symbol: has currency symbol or not.
 
 
@@ -98,11 +98,11 @@ Comparing the baseline model with the model having the url feature, we can find 
 | all_in       | 98%      | 99%       | 83%    | 90% |
 
 <p float="left">
-  <img src="plots/base_feature.JPG" width="100" />
-  <img src="plots/base_urls.JPG" width="100" /> 
-  <img src="plots/base_phone_number.JPG" width="100" />
-  <img src="plots/base_currency.JPG" width="100" />
-  <img src="plots/base_all_in.JPG" width="100" />
+  <img src="plots/base_feature.JPG" width="200" />
+  <img src="plots/base_urls.JPG" width="200" /> 
+  <img src="plots/base_phone_number.JPG" width="200" />
+  <img src="plots/base_currency.JPG" width="200" />
+  <img src="plots/base_all_in.JPG" width="200" />
 </p>
 
 ## Command Line
