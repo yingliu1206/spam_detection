@@ -61,7 +61,7 @@ The features we chose include the base feature, feature_url, feature_num, and fe
 * Transform it into sparse matrix
 * Use `scipy.sparse.hstack()` to stack the new feature to the base feature
 
-#### For feature_url:
+#### For feature_phoneNumber:
 
 * write a function _has_phoneNumber_, which can test whether messages contain phone number or not with regular expression `re.findall('((?:\+\d{2}[-\.\s]??|\d{4}[-\.\s]??)?(?:\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4}))', line)`
 * Utilize `preprocessing.LabelBinarizer()` to convert the variable into binary version 
@@ -103,3 +103,4 @@ Comparing the baseline model with the model having the url feature, we can find 
 
 
 # Discussion
+
