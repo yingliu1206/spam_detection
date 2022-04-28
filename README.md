@@ -114,3 +114,9 @@ Comparing the baseline model with the model having the url feature, we can find 
 
 * Are there any other features can be used to detect spams?
 * Besides multinomial Naive Bayes model, are there any other models which can be used for spam detection problem?
+
+## Reference
+* Kaddoura, S., Chandrasekaran, G., Elena Popescu, D., & Duraisamy, J. H. (2022). A systematic literature review on spam content detection and classification. PeerJ. Computer science, 8, e830.
+* Parmar, Nandan & Sharma, Ankita & Jain, Harshita & Kadam, Amol. (2020). Email Spam Detection using Naïve Bayes and Particle Swarm Optimization. Volume 6. 367 - 373.
+* Sai Charan Reddy, M. (2021) SMS Spam and Ham Detection Using Naïve Bayes Algorithm. SSRN Electronic Journal, 251 - 256.
+* Almeida, T. A., Hidalgo, J. M. G. & Yamakami, A. (2011). Contributions to the study of SMS spam filtering: new collection and results.. In M. R. B. Hardy & F. W. Tompa (eds.), ACM Symposium on Document Engineering (p./pp. 259-262), : ACM. ISBN: 978-1-4503-0863-2
